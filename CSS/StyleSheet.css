@@ -1,0 +1,22 @@
+﻿body {
+    background-color: lightblue;
+    text-aling: center;
+    if (buttonPosition.x < 0)
+
+{
+    buttonPosition .x = 0;
+}
+
+if (buttonPosition.y < 0) {
+    buttonPosition .y = 0;
+}
+
+if (buttonPosition.x > document.body.offsetWidth - button.offsetWidth) {
+    buttonPosition .x = document.body.offsetWidth - button.offsetWidth;
+}
+
+if (buttonPosition.y > document.body.offsetHeight - button.offsetHeight) {
+    buttonPosition .y = document.body.offsetHeight - button.offsetHeight;
+}
+
+}

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Jez Game</title>
+    <style>
+        #jez {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="score">Score: <span id="score-value">0</span></div>
+    <img id="jez" src="Jez.png" alt="Jez Game">
+
+    <script>
+        let scoreValue = 0;
+        const scoreElement = document.getElementById("score-value");
+
+        function increaseScore() {
+            scoreValue++;
+            scoreElement.innerText = scoreValue;
+        }
+
+        const jezElement = document.getElementById("jez");
+        jezElement.addEventListener("click", increaseScore);
+    </script>
+</body>
+</html>

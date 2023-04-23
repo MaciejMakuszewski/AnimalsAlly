@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Jez Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #1b1b1b;
+            color: black;
+        }
+
+        #jez {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            animation: jez-move 20s linear infinite;
+            transform: scaleX(-1);
+        }
+
+        @keyframes jez-move {
+            0% {
+                right: 0;
+                transform: scaleX(-1);
+            }
+
+            50% {
+                right: 100%;
+                transform: scaleX(1);
+            }
+
+            100% {
+                right: 0;
+                transform: scaleX(-1);
+            }
+        }
+
+        #button {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+        }
+    </style>
+</head>
+<body>
+    <img src="Jez.png" id="jez">
+    <img src="Button.png" id="button">
+
+    <script>
+        // Code for moving Jez.png and Button.png
+        var jez = document.getElementById("jez");
+        var jezPosition = { x: jez.offsetLeft, y: jez.offsetTop };
+
+        var button = document.getElementById("button");
+        var buttonPosition = { x: button.offsetLeft, y: button.offsetTop };
+
+        var direction = 1;
+
+        setInterval(function () {
+            jezPosition.x += 5 * direction;
+            jez.style.left = jezPosition.x + "px";
+
+            if (jezPosition.x >= document.body.offsetWidth - jez.offsetWidth || jezPosition.x <= 0) {
+                direction *= -1;
+            }
+        }, 50);
+
+        document.addEventListener("keydown", function (event) {
+            switch (event.key) {
+                case "ArrowLeft":
+                    buttonPosition.x -= 20;
+                    break;
+                case "ArrowRight":
+                    buttonPosition.x += 20;
+                    break;
+                case "ArrowUp":
+                    buttonPosition.y -= 20;
+                    break;
+                case "ArrowDown":
+                    buttonPosition.y += 20;
+                    break;
+            }
+
+            button.style.left = buttonPosition.x + "px";
+            button.style.top = buttonPosition.y + "px";
+
+            // Check if button has reached jez
+            if (buttonPosition.x >= jezPosition.x && buttonPosition.x <= jezPosition.x + jez.offsetWidth &&
+                buttonPosition.y >= jezPosition.y && buttonPosition.y <= jezPosition.y + jez.offsetHeight) {
+                window.location.href = "AA_SecondPage.html"; // go to second page
+            }
+        });
+
+        // Code for moving Button.png with mouse
+        var isDragging = false;
+
+        // Add event listeners for mouse down, up, and move
+        button.addEventListener("mousedown", function (event) {
+            isDragging = true;
+        });
+
+        document.addEventListener("mouseup", function (event) {
+            isDragging = false;
+        });
+
+        document.addEventListener("mousemove", function (event) {
+            if (isDragging) {
+                buttonPosition.x = event.clientX - (button.offsetWidth / 2);
+                buttonPosition.y = event.clientY - (button.offsetHeight / 2);
+
+                button.style.left = buttonPosition.x + "px";
+                button.style.top = buttonPosition.y + "px";
+
+                // Check if button has reached jez
+                if (buttonPosition.x >= jezPosition.x && buttonPosition.x <= jezPosition.x + jez.offsetWidth &&
+                    buttonPosition.y >= jezPosition.y && buttonPosition.y <= jezPosition.y + jez.offsetHeight) {
+                    window.location.href = "AA_SecondPage.html"; // go to second page
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
